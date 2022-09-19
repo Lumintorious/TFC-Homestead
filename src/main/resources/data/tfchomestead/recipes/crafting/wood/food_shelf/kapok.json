@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["WWW", "LLL", "WWW"],
+  "key": {
+    "W": { "item": "tfc:wood/planks/kapok" },
+    "L": { "item": "tfc:wood/lumber/kapok" }
+  },
+  "result": { "item": "tfchomestead:wood/food_shelf/kapok" }
+}

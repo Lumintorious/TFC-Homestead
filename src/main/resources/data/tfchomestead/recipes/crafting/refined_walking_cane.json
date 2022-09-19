@@ -1,0 +1,11 @@
+{
+   "type": "minecraft:crafting_shaped",
+   "pattern": ["L  ", " S ", "  S"],
+   "key": {
+      "L": { "tag": "forge:ingots/wrought_iron" },
+      "S": { "tag": "forge:rods/wrought_iron" }
+   },
+   "result": {
+      "item": "tfchomestead:refined_walking_cane"
+   }
+}

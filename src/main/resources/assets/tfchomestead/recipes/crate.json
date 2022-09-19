@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SLS",
+    "LCL",
+    "SLS"
+  ],
+  "key": {
+    "L": {
+      "type": "forge:ore_dict",
+      "ore": "lumber"
+    },
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "sheetWroughtIron"
+    },
+    "C": {
+      "type": "forge:ore_dict",
+      "ore": "chest"
+    }
+  },
+  "result": {
+    "item": "tfcstorage:crate",
+    "count": 4
+  }
+}

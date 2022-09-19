@@ -1,0 +1,28 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "tfchomestead:villager_homestead",
+  "config": {
+    "offsetsY": [
+      {
+        "structure": "tfchomestead:mud_hut",
+        "offsetY": -5
+      },
+      {
+        "structure": "tfchomestead:thatch_tent",
+        "offsetY": 0
+      },
+      {
+        "structure": "tfchomestead:daub_hut",
+        "offsetY": 0
+      },
+      {
+        "structure": "tfchomestead:suspended_hut",
+        "offsetY": 1
+      },
+      {
+        "structure": "tfchomestead:campsite",
+        "offsetY": 0
+      }
+    ]
+  }
+}

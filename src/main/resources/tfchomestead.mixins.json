@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.lumintorious.tfchomestead.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "EntitySpeedMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "tfchomestead.refmap.json"
+}

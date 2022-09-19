@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["WWW", "LLL", "WWW"],
+  "key": {
+    "W": { "item": "tfc:wood/planks/white_cedar" },
+    "L": { "item": "tfc:wood/lumber/white_cedar" }
+  },
+  "result": { "item": "tfchomestead:wood/food_shelf/white_cedar" }
+}

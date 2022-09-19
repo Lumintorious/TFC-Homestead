@@ -1,0 +1,19 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "feature": "tfchomestead:villager_homestead",
+  "placement": [
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 760
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "WORLD_SURFACE_WG"
+    },
+    {
+      "type": "tfc:flat_enough",
+      "flatness": 0.99,
+      "radius": 12
+    }
+  ]
+}

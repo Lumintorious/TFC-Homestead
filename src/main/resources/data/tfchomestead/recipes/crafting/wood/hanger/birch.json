@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["WWW", " S ", " S "],
+  "key": {
+    "W": { "item": "tfc:wood/planks/birch" },
+    "S": { "tag": "forge:string" }
+  },
+  "result": { "item": "tfchomestead:wood/hanger/birch" }
+}

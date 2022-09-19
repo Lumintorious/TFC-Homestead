@@ -1,0 +1,12 @@
+{
+  "type": "tfc:barrel_sealed",
+  "input_fluid": {
+    "ingredient": "tfc:rye_whiskey",
+    "amount": 100
+  },
+  "output_fluid": {
+    "fluid": "tfchomestead:aged_rye_whiskey",
+    "amount": 100
+  },
+  "duration": 576000
+}

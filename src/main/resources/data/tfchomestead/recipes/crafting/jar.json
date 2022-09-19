@@ -1,0 +1,12 @@
+{
+   "type": "minecraft:crafting_shaped",
+   "pattern": ["PLP", "P P", "PPP"],
+   "key": {
+      "P": { "item": "minecraft:glass_pane" },
+      "L": { "item": "tfc:metal/sheet/tin" }
+   },
+   "result": {
+      "item": "tfchomestead:jar",
+      "count": 4
+   }
+}

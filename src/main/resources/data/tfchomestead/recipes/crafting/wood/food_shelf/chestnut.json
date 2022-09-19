@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["WWW", "LLL", "WWW"],
+  "key": {
+    "W": { "item": "tfc:wood/planks/chestnut" },
+    "L": { "item": "tfc:wood/lumber/chestnut" }
+  },
+  "result": { "item": "tfchomestead:wood/food_shelf/chestnut" }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "tfchomestead:block/jar_base",
+  "textures": {
+    "lid": "tfc:block/metal/full/tin",
+    "glass": "tfc:block/metal/full/tin",
+    "particle": "minecraft:block/glass"
+  }
+}

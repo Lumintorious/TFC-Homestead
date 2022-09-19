@@ -1,0 +1,11 @@
+{
+   "type": "minecraft:crafting_shaped",
+   "pattern": ["L  ", " S ", "  S"],
+   "key": {
+      "L": { "tag": "tfc:lumber" },
+      "S": { "tag": "forge:rods/wooden" }
+   },
+   "result": {
+      "item": "tfchomestead:walking_cane"
+   }
+}

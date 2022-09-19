@@ -1,0 +1,33 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "tfchomestead:item/refined_walking_cane"
+  },
+  "display": {
+    "gui": {
+      "rotation": [ 0, 180, 0 ],
+      "translation": [ 0, 0, 0 ],
+      "scale": [ 1, 1, 1 ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [ -95, 260, -40 ],
+      "translation": [ 0, 1.5, -3 ],
+      "scale": [ 1.2, 1.2, 1.2 ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [ -95, -280, 40 ],
+      "translation": [ 0, 1.5, -3 ],
+      "scale": [ 1.1, 1.1, 1.1 ]
+    },
+    "firstperson_righthand": {
+      "rotation": [ -90, 260, 25 ],
+      "translation": [ 1.13, 3.2, 1.13],
+      "scale": [ 0.68, 0.68, 0.68 ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [ -90, -280, -25 ],
+      "translation": [ 1.13, 3.2, 1.13],
+      "scale": [ 0.68, 0.68, 0.68 ]
+    }
+  }
+}

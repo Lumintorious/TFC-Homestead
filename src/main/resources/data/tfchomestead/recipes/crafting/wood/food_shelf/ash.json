@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["WWW", "LLL", "WWW"],
+  "key": {
+    "W": { "item": "tfc:wood/planks/ash" },
+    "L": { "item": "tfc:wood/lumber/ash" }
+  },
+  "result": { "item": "tfchomestead:wood/food_shelf/ash" }
+}
