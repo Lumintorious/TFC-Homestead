@@ -38,6 +38,7 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
@@ -48,16 +49,10 @@ import org.slf4j.Logger;
 public class TFCHomestead
 {
     public static final String MOD_ID = "tfchomestead";
-    // Directly reference a slf4j logger
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public TFCHomestead()
     {
-        // Register the setup method for modloading
-
-        // Register ourselves for server and other game events we are interested in
-        MinecraftForge.EVENT_BUS.register(this);
-
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         if(FMLEnvironment.dist == Dist.CLIENT) {
@@ -66,6 +61,7 @@ public class TFCHomestead
         }
 
         MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGHEST, this::onRightClick);
+        MinecraftForge.EVENT_BUS.addListener(HomesteadEntities::addLootToAnimal);
 
         if(TFCHomesteadConfig.COMMON.enableVillagerSpawns.get()) {
             TFCVillagerProfessions.POI_TYPES.register(eventBus);
@@ -74,22 +70,25 @@ public class TFCHomestead
             MinecraftForge.EVENT_BUS.addListener(HomesteadEntities::resetTradesOnSpawn);
         }
 
-        if(TFCHomesteadConfig.COMMON.enableMoreLootForDomesticatedAnimals.get()) {
-            MinecraftForge.EVENT_BUS.addListener(HomesteadEntities::addLootToAnimal);
-        }
-
-        StoredTrait.init();
         HomesteadEntities.ENTITIES.register(eventBus);
         HomesteadBlocks.BLOCKS.register(eventBus);
         HomesteadItems.ITEMS.register(eventBus);
+        HomesteadBlockEntities.BLOCK_ENTITIES.register(eventBus);
+
         if(TFCHomesteadConfig.COMMON.enableAgedDrinks.get()) {
             HomesteadFluid.FLUIDS.register(eventBus);
             MinecraftForge.EVENT_BUS.addListener(this::onDrink);
         }
-        HomesteadBlockEntities.BLOCK_ENTITIES.register(eventBus);
         eventBus.addListener(this::onInterModComms);
+        eventBus.addListener(this::setup);
         eventBus.addListener(HomesteadEntities::registerAttributes);
 
+    }
+
+    public void setup(FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> {
+            StoredTrait.init();
+        });
     }
 
     public void onInterModComms(InterModEnqueueEvent event) {
@@ -142,7 +141,7 @@ public class TFCHomestead
 
     public void getSpeed(LivingEvent.LivingUpdateEvent event) {
         if(event.getEntity() instanceof Player player) {
-            System.out.println(player.getAbilities().getWalkingSpeed());
+            LOGGER.info(String.valueOf(player.getAbilities().getWalkingSpeed()));
         }
     }
 }

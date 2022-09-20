@@ -25,7 +25,7 @@ public class EntitySpeedMixin {
     @Inject(method = "getBlockSpeedFactor", at = @At("RETURN"), cancellable = true)
     private void getBlockSpeedFactor(CallbackInfoReturnable<Float> callbackInfo) {
         if(callbackInfo.getReturnValue() < 1f) {
-            if(self() instanceof TFCHorse || self() instanceof TFCDonkey || self() instanceof TFCMule && TFCHomesteadConfig.COMMON.enableRideableConstantSpeed.get()) {
+            if(self() instanceof TFCHorse || self() instanceof TFCDonkey || self() instanceof TFCMule && TFCHomesteadConfig.SERVER.enableRideableConstantSpeed.get()) {
                 callbackInfo.setReturnValue(1f);
             } else if(self() instanceof Player player) {
                 ItemStack main = player.getMainHandItem();

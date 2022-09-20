@@ -1,5 +1,6 @@
 package com.lumintorious.tfchomestead.common.world;
 
+import com.lumintorious.tfchomestead.TFCHomestead;
 import com.lumintorious.tfchomestead.common.TFCHomesteadConfig;
 import com.mojang.serialization.Codec;
 import net.dries007.tfc.mixin.accessor.StructureTemplateAccessor;
@@ -48,7 +49,7 @@ public class VillagerHomesteadFeature extends Feature<VillagerHomesteadConfig> {
         final ChunkPos chunkPos = new ChunkPos(pos);
         final StructureManager manager = TreeHelpers.getStructureManager(level);
         final StructurePlaceSettings settings = TreeHelpers.getPlacementSettings(level, chunkPos, random);
-        settings.clearProcessors().addProcessor(new BlockRotProcessor(Mth.clamp(1, 0.0F, 1.0F))).setRandom(new Random());
+        settings.clearProcessors().addProcessor(new BlockRotProcessor(Mth.clamp(1, 0.0F, 1.0F))).setRandom(random);
         final ResourceLocation structureId = new ResourceLocation(entry.getKey());//config.structureNames().get(random.nextInt(config.structureNames().size()));
         final StructureTemplate structure = manager.getOrCreate(structureId);
         final StructureTemplate template = structure;
@@ -62,7 +63,7 @@ public class VillagerHomesteadFeature extends Feature<VillagerHomesteadConfig> {
 
             structure.placeInWorld(
                 level,
-                pos, pos, settings, new Random(), 0
+                pos, pos, settings, random, 0
             );
         final List<StructureTemplate.StructureBlockInfo> transformedBlockInfos = settings.getRandomPalette(((StructureTemplateAccessor) template).accessor$getPalettes(), pos).blocks();
         BoundingBox boundingBox = settings.getBoundingBox();
@@ -75,7 +76,7 @@ public class VillagerHomesteadFeature extends Feature<VillagerHomesteadConfig> {
                     // No world, can't rotate with world context
                 @SuppressWarnings("deprecation")
                 BlockState stateReplace = blockInfo.state.mirror(settings.getMirror()).rotate(settings.getRotation());
-                System.out.println(stateReplace);
+                TFCHomestead.LOGGER.info(stateReplace.toString());
                 level.setBlock(posAt, Blocks.AIR.defaultBlockState(), 2);
                 level.setBlock(posAt, stateReplace, 2);
             }

@@ -43,12 +43,8 @@ public class ClientEvents {
         ItemBlockRenderTypes.setRenderLayer(HomesteadBlocks.JAR.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(HomesteadBlocks.FULL_JAR.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(HomesteadBlocks.WHEAT_GRAIN_PILE.get(), RenderType.solid());
-        for(Map.Entry<Wood, RegistryObject<HangerBlock>> entry : HomesteadBlocks.HANGERS.entrySet()) {
-            ItemBlockRenderTypes.setRenderLayer(entry.getValue().get(), RenderType.cutout());
-        }
-        for(Map.Entry<Wood, RegistryObject<FoodShelfBlock>> entry : HomesteadBlocks.FOOD_SHELVES.entrySet()) {
-            ItemBlockRenderTypes.setRenderLayer(entry.getValue().get(), RenderType.cutout());
-        }
+        HomesteadBlocks.HANGERS.values().forEach(reg -> ItemBlockRenderTypes.setRenderLayer(reg.get(), RenderType.cutout()));
+        HomesteadBlocks.FOOD_SHELVES.values().forEach(reg -> ItemBlockRenderTypes.setRenderLayer(reg.get(), RenderType.cutout()));
     }
 
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {

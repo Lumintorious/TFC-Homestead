@@ -9,6 +9,7 @@ import java.util.function.Function;
 
 public class TFCHomesteadConfig {
     public static CommonImpl COMMON = register(ModConfig.Type.COMMON, CommonImpl::new);
+    public static ServerImpl SERVER = register(ModConfig.Type.SERVER, ServerImpl::new);
 
     public static void init() {}
 
@@ -19,10 +20,25 @@ public class TFCHomesteadConfig {
         return specPair.getLeft();
     }
 
+    /**
+     * Synced between logical server and client
+     */
+    public static class ServerImpl {
+        public final ForgeConfigSpec.BooleanValue enableRideableConstantSpeed;
+
+        ServerImpl(ForgeConfigSpec.Builder builder) {
+            enableRideableConstantSpeed = builder
+                .comment("If enabled, rideable animals will not be slowed by plants/snow/mud when ridden.")
+                .define("enableRideableConstantSpeed", true);
+        }
+    }
+
+    /**
+     * Expected on both logical sides but is not synced
+     */
     public static class CommonImpl {
         public final ForgeConfigSpec.BooleanValue enableMoreLootForDomesticatedAnimals;
         public final ForgeConfigSpec.BooleanValue enableVillagerSpawns;
-        public final ForgeConfigSpec.BooleanValue enableRideableConstantSpeed;
         public final ForgeConfigSpec.BooleanValue enableAgedDrinks;
 
         CommonImpl(ForgeConfigSpec.Builder builder) {
@@ -34,10 +50,6 @@ public class TFCHomesteadConfig {
             enableVillagerSpawns = builder
                     .comment("If enabled, villager huts will spawn in the world")
                     .define("enableVillagerSpawns", true);
-
-            enableRideableConstantSpeed = builder
-                    .comment("If enabled, rideable animals will not be slowed by plants/snow/mud when ridden.")
-                    .define("enableRideableConstantSpeed", true);
 
             enableAgedDrinks = builder
                     .comment("If enabled, aging of drinks for effects is possible.")
