@@ -21,39 +21,37 @@ public class TFCHomesteadConfig {
     }
 
     /**
-     * Synced between logical server and client
+     * Synced between logical server and client. Different per-world
      */
     public static class ServerImpl {
         public final ForgeConfigSpec.BooleanValue enableRideableConstantSpeed;
+        public final ForgeConfigSpec.BooleanValue enableMoreLootForDomesticatedAnimals;
 
         ServerImpl(ForgeConfigSpec.Builder builder) {
             enableRideableConstantSpeed = builder
                 .comment("If enabled, rideable animals will not be slowed by plants/snow/mud when ridden.")
                 .define("enableRideableConstantSpeed", true);
+
+            enableMoreLootForDomesticatedAnimals = builder
+                .comment("If enabled, animals who are familiarized will yield more meat/h" +
+                    "ides (up to 100% more at 100 familiarity)")
+                .define("enableMoreLootForDomesticatedAnimals", true);
+
         }
     }
 
     /**
-     * Expected on both logical sides but is not synced
+     * Expected on both logical sides but is not synced, so server wins for worldgen purposes. Global, so not per world.
      */
     public static class CommonImpl {
-        public final ForgeConfigSpec.BooleanValue enableMoreLootForDomesticatedAnimals;
         public final ForgeConfigSpec.BooleanValue enableVillagerSpawns;
-        public final ForgeConfigSpec.BooleanValue enableAgedDrinks;
 
         CommonImpl(ForgeConfigSpec.Builder builder) {
-            enableMoreLootForDomesticatedAnimals = builder
-                .comment("If enabled, animals who are familiarized will yield more meat/h" +
-                        "ides (up to 100% more at 100 familiarity)")
-                .define("enableMoreLootForDomesticatedAnimals", true);
 
             enableVillagerSpawns = builder
                     .comment("If enabled, villager huts will spawn in the world")
                     .define("enableVillagerSpawns", true);
 
-            enableAgedDrinks = builder
-                    .comment("If enabled, aging of drinks for effects is possible.")
-                    .define("enableAgedDrinks", true);
         }
     }
 }

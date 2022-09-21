@@ -51,7 +51,7 @@ public class HomesteadEntities {
             TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation("tfc", "raw_hides"));
 
     public static void addLootToAnimal(net.minecraftforge.event.entity.living.LivingDropsEvent event) {
-        if(!TFCHomesteadConfig.COMMON.enableMoreLootForDomesticatedAnimals.get()) return;
+        if(!TFCHomesteadConfig.SERVER.enableMoreLootForDomesticatedAnimals.get()) return;
         if(event.getEntity() instanceof TFCAnimal animal) {
             float familiarity = animal.getFamiliarity();
             List<ItemEntity> additions = new LinkedList<>();
