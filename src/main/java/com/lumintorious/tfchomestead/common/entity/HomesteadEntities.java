@@ -7,10 +7,13 @@ import com.lumintorious.tfchomestead.common.villagers.TFCHomesteadVillager;
 import net.dries007.tfc.common.entities.livestock.TFCAnimal;
 import net.dries007.tfc.common.fluids.TFCFluids;
 import net.minecraft.core.Registry;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -44,6 +47,11 @@ public class HomesteadEntities {
     public static void resetTradesOnSpawn(EntityJoinWorldEvent event) {
         if(!event.loadedFromDisk() && event.getEntity() instanceof TFCHomesteadVillager villager) {
             villager.randomizeData();
+        }
+        if(event.getEntity() instanceof ServerPlayer player) {
+            player.sendMessage(new TextComponent(
+                "TFC Homestead WARNING: The Hangers and the Food Shelves will be moved to the mod Firmalife. If you have any in your world, please remove them and the items inside before updating to the next Homestead Version"
+            ), player.getUUID());
         }
     }
 
