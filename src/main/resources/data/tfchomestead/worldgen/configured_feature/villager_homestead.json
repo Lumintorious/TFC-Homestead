@@ -9,11 +9,11 @@
       },
       {
         "structure": "tfchomestead:thatch_tent",
-        "offsetY": 0
+        "offsetY": 1
       },
       {
         "structure": "tfchomestead:daub_hut",
-        "offsetY": 0
+        "offsetY": 1
       },
       {
         "structure": "tfchomestead:suspended_hut",
@@ -21,7 +21,7 @@
       },
       {
         "structure": "tfchomestead:campsite",
-        "offsetY": 0
+        "offsetY": 1
       }
     ]
   }
