@@ -74,9 +74,6 @@ public class TFCHomestead
             MinecraftForge.EVENT_BUS.addListener(HomesteadEntities::resetTradesOnSpawn);
         }
 
-        if(TFCHomesteadConfig.COMMON.enableMoreLootForDomesticatedAnimals.get()) {
-            MinecraftForge.EVENT_BUS.addListener(HomesteadEntities::addLootToAnimal);
-        }
 
         StoredTrait.init();
         HomesteadEntities.ENTITIES.register(eventBus);

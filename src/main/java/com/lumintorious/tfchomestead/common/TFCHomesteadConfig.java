@@ -20,17 +20,11 @@ public class TFCHomesteadConfig {
     }
 
     public static class CommonImpl {
-        public final ForgeConfigSpec.BooleanValue enableMoreLootForDomesticatedAnimals;
         public final ForgeConfigSpec.BooleanValue enableVillagerSpawns;
         public final ForgeConfigSpec.BooleanValue enableRideableConstantSpeed;
         public final ForgeConfigSpec.BooleanValue enableAgedDrinks;
 
         CommonImpl(ForgeConfigSpec.Builder builder) {
-            enableMoreLootForDomesticatedAnimals = builder
-                .comment("If enabled, animals who are familiarized will yield more meat/h" +
-                        "ides (up to 100% more at 100 familiarity)")
-                .define("enableMoreLootForDomesticatedAnimals", true);
-
             enableVillagerSpawns = builder
                     .comment("If enabled, villager huts will spawn in the world")
                     .define("enableVillagerSpawns", true);

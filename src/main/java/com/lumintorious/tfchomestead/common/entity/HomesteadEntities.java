@@ -58,25 +58,4 @@ public class HomesteadEntities {
     public static final TagKey<Item> RAW_HIDES =
             TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation("tfc", "raw_hides"));
 
-    public static void addLootToAnimal(net.minecraftforge.event.entity.living.LivingDropsEvent event) {
-        if(!TFCHomesteadConfig.COMMON.enableMoreLootForDomesticatedAnimals.get()) return;
-        if(event.getEntity() instanceof TFCAnimal animal) {
-            float familiarity = animal.getFamiliarity();
-            List<ItemEntity> additions = new LinkedList<>();
-            for(ItemEntity entity : event.getDrops()) {
-                if(entity.getItem().is(HangerBlockEntity.RAW_MEAT) || entity.getItem().is(RAW_HIDES) || entity.getItem().is(Items.FEATHER)) {
-                    ItemEntity added = entity.copy();
-                    added.setItem(added.getItem().copy());
-                    ItemStack stack = added.getItem();
-                    if(stack.getCount() == 1 && familiarity < 0.5f) {
-                        stack.setCount(0);
-                    } else {
-                        stack.setCount((int) Math.ceil(familiarity) * stack.getCount());
-                    }
-                    additions.add(added);
-                }
-            }
-            event.getDrops().addAll(additions);
-        }
-    }
 }
