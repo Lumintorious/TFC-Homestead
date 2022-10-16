@@ -19,6 +19,7 @@ import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -44,12 +45,11 @@ public class HomesteadFluid {
     public static Optional<AgedAlcohol> getAlcohol(IFluidHandlerItem handler) {
         FluidStack fluidStack = handler.getFluidInTank(0);
         if(!fluidStack.isEmpty()) {
-            var fluid = HomesteadFluid.AGED_ALCOHOL.inverse().keySet().stream().filter(f -> {
-                System.out.println(f.getSource().getSource());
-                System.out.println(fluidStack.getFluid());
-                return f.getSource().getSource() == fluidStack.getFluid();
-            }).findAny();
-            return fluid.map(f -> HomesteadFluid.AGED_ALCOHOL.inverse().get(f));
+            return HomesteadFluid.AGED_ALCOHOL
+                    .entrySet()
+                    .stream()
+                    .filter(entry -> entry.getValue().getSource().getSource() == fluidStack.getFluid())
+                    .map(Map.Entry::getKey).findAny();
         }
         return Optional.empty();
     }
