@@ -2,6 +2,15 @@
   "itemGroup.tfchomestead": "TFC Homestead",
   "item.tfc.ceramic.jug.filled": "Ceramic Jug (Full)",
 
+  "tfc.recipe.barrel.tfc.barrel.aged_beer": "Aged Beer",
+  "tfc.recipe.barrel.tfc.barrel.aged_whiskey": "Aged Whiskey",
+  "tfc.recipe.barrel.tfc.barrel.aged_corn_whiskey": "Aged Corn Whiskey",
+  "tfc.recipe.barrel.tfc.barrel.aged_rye_whiskey": "Aged Rye Whiskey",
+  "tfc.recipe.barrel.tfc.barrel.aged_cider": "Aged Cider",
+  "tfc.recipe.barrel.tfc.barrel.aged_rum": "Aged Rum",
+  "tfc.recipe.barrel.tfc.barrel.aged_sake": "Aged Sake",
+  "tfc.recipe.barrel.tfc.barrel.aged_vodka": "Aged Vodka",
+
   "entity.tfchomestead.villager": "Villager",
   "entity.minecraft.villager.tfchomestead.primitive": "Primitive",
   "entity.tfchomestead.villager.tfchomestead.primitive": "Primitive",

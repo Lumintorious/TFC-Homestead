@@ -55,7 +55,6 @@ public class TFCHomestead
         }
 
         MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGHEST, this::onRightClick);
-        MinecraftForge.EVENT_BUS.addListener(HomesteadEntities::addLootToAnimal);
         MinecraftForge.EVENT_BUS.addListener(HomesteadEntities::resetTradesOnSpawn);
         MinecraftForge.EVENT_BUS.addListener(this::onDrink);
 

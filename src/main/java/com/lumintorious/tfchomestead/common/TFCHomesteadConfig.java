@@ -25,18 +25,11 @@ public class TFCHomesteadConfig {
      */
     public static class ServerImpl {
         public final ForgeConfigSpec.BooleanValue enableRideableConstantSpeed;
-        public final ForgeConfigSpec.BooleanValue enableMoreLootForDomesticatedAnimals;
 
         ServerImpl(ForgeConfigSpec.Builder builder) {
             enableRideableConstantSpeed = builder
                 .comment("If enabled, rideable animals will not be slowed by plants/snow/mud when ridden.")
                 .define("enableRideableConstantSpeed", true);
-
-            enableMoreLootForDomesticatedAnimals = builder
-                .comment("If enabled, animals who are familiarized will yield more meat/h" +
-                    "ides (up to 100% more at 100 familiarity)")
-                .define("enableMoreLootForDomesticatedAnimals", true);
-
         }
     }
 
@@ -47,7 +40,6 @@ public class TFCHomesteadConfig {
         public final ForgeConfigSpec.BooleanValue enableVillagerSpawns;
 
         CommonImpl(ForgeConfigSpec.Builder builder) {
-
             enableVillagerSpawns = builder
                     .comment("If enabled, villager huts will spawn in the world")
                     .define("enableVillagerSpawns", true);

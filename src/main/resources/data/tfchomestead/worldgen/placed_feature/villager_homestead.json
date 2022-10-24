@@ -4,7 +4,7 @@
   "placement": [
     {
       "type": "minecraft:rarity_filter",
-      "chance": 760
+      "chance": 320
     },
     {
       "type": "minecraft:heightmap",
@@ -12,7 +12,7 @@
     },
     {
       "type": "tfc:flat_enough",
-      "flatness": 0.99,
+      "flatness": 0.98,
       "radius": 12
     }
   ]

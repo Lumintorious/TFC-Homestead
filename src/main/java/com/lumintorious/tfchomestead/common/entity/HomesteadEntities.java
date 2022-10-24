@@ -7,10 +7,13 @@ import com.lumintorious.tfchomestead.common.villagers.TFCHomesteadVillager;
 import net.dries007.tfc.common.entities.livestock.TFCAnimal;
 import net.dries007.tfc.common.fluids.TFCFluids;
 import net.minecraft.core.Registry;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -45,30 +48,14 @@ public class HomesteadEntities {
         if(!event.loadedFromDisk() && event.getEntity() instanceof TFCHomesteadVillager villager) {
             villager.randomizeData();
         }
+        if(event.getEntity() instanceof ServerPlayer player) {
+            player.sendMessage(new TextComponent(
+                "TFC Homestead WARNING: The Hangers and the Food Shelves will be moved to the mod Firmalife. If you have any in your world, please remove them and the items inside before updating to the next Homestead Version"
+            ), player.getUUID());
+        }
     }
 
     public static final TagKey<Item> RAW_HIDES =
             TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation("tfc", "raw_hides"));
 
-    public static void addLootToAnimal(net.minecraftforge.event.entity.living.LivingDropsEvent event) {
-        if(!TFCHomesteadConfig.SERVER.enableMoreLootForDomesticatedAnimals.get()) return;
-        if(event.getEntity() instanceof TFCAnimal animal) {
-            float familiarity = animal.getFamiliarity();
-            List<ItemEntity> additions = new LinkedList<>();
-            for(ItemEntity entity : event.getDrops()) {
-                if(entity.getItem().is(HangerBlockEntity.RAW_MEAT) || entity.getItem().is(RAW_HIDES) || entity.getItem().is(Items.FEATHER)) {
-                    ItemEntity added = entity.copy();
-                    added.setItem(added.getItem().copy());
-                    ItemStack stack = added.getItem();
-                    if(stack.getCount() == 1 && familiarity < 0.5f) {
-                        stack.setCount(0);
-                    } else {
-                        stack.setCount((int) Math.ceil(familiarity) * stack.getCount());
-                    }
-                    additions.add(added);
-                }
-            }
-            event.getDrops().addAll(additions);
-        }
-    }
 }
