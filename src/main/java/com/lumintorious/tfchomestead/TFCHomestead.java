@@ -34,6 +34,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
+
+import net.dries007.tfc.common.items.TFCItems;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -99,9 +101,13 @@ public class TFCHomestead
                 stack,
                 event.getHitVec()
             ))) {
-                level.setBlockAndUpdate(
-                    pos, GrainPileBlockEntity.GRAIN_TO_PILES.get(stack.getItem()).defaultBlockState()
-                );
+                HomesteadBlocks.GRAIN_PILES.forEach((grain, pile) -> {
+                    if (TFCItems.FOOD.get(grain.getFood()).get().equals(stack.getItem())) {
+                        level.setBlockAndUpdate(
+                            pos, pile.get().defaultBlockState()
+                        );
+                    }
+                });
 
                 event.setCanceled(true);
                 event.setCancellationResult(InteractionResult.SUCCESS);

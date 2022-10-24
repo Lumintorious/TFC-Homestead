@@ -9,6 +9,8 @@ import com.lumintorious.tfchomestead.common.item.HomesteadItems;
 import net.dries007.tfc.common.blocks.ExtendedProperties;
 import net.dries007.tfc.common.blocks.wood.Wood;
 import net.dries007.tfc.common.fluids.FlowingFluidRegistryObject;
+import net.dries007.tfc.common.items.Food;
+import net.dries007.tfc.common.items.TFCItems;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.registry.RegistrationHelpers;
 import net.minecraft.world.item.BlockItem;
@@ -85,34 +87,19 @@ public abstract class HomesteadBlocks {
     private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> blockSupplier, @Nullable Function<T, ? extends BlockItem> blockItemFactory) {
         return RegistrationHelpers.registerBlock(BLOCKS, HomesteadItems.ITEMS, name, blockSupplier, blockItemFactory);
     }
-    public static RegistryObject<Block> WHEAT_GRAIN_PILE = register(
-    "grain_pile/wheat",
-        () -> new GrainPileBlock(GrainPileBlock.PROPERTIES)
+
+    public static final Map<Grain, RegistryObject<Block>> GRAIN_PILES = Helpers.mapOfKeys(Grain.class, grain ->
+        register("grain_pile/" + grain.name(), () -> new GrainPileBlock(grainPileProperties(), TFCItems.FOOD.get(grain.getFood())))
     );
 
-    public static RegistryObject<Block> MAIZE_GRAIN_PILE = register(
-        "grain_pile/maize",
-        () -> new GrainPileBlock(GrainPileBlock.PROPERTIES)
-    );
-
-    public static RegistryObject<Block> RYE_GRAIN_PILE = register(
-        "grain_pile/rye",
-        () -> new GrainPileBlock(GrainPileBlock.PROPERTIES)
-    );
-
-    public static RegistryObject<Block> RICE_GRAIN_PILE = register(
-        "grain_pile/rice",
-        () -> new GrainPileBlock(GrainPileBlock.PROPERTIES)
-    );
-
-    public static RegistryObject<Block> OAT_GRAIN_PILE = register(
-        "grain_pile/oat",
-        () -> new GrainPileBlock(GrainPileBlock.PROPERTIES)
-    );
-
-    public static RegistryObject<Block> BARLEY_GRAIN_PILE = register(
-        "grain_pile/barley",
-        () -> new GrainPileBlock(GrainPileBlock.PROPERTIES)
-    );
+    public static ExtendedProperties grainPileProperties()
+    {
+        return ExtendedProperties.of(BlockBehaviour.Properties.of(Material.GRASS).strength(0.3F).sound(SoundType.GRASS).noOcclusion()
+                .isValidSpawn((a, b, c, d) -> false)
+                .isRedstoneConductor((a, b, c) -> false)
+                .isSuffocating((a, b, c) -> false)
+                .destroyTime(3.5f)
+                .isViewBlocking((a, b, c) -> false)).blockEntity(() -> HomesteadBlockEntities.GRAIN_PILE.get());
+    }
 
 }
