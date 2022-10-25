@@ -22,7 +22,6 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -125,12 +124,6 @@ public class TFCHomestead
                     player.addEffect(alcohol.getEffectInstance());
                 });
             });
-        }
-    }
-
-    public void getSpeed(LivingEvent.LivingUpdateEvent event) {
-        if(event.getEntity() instanceof Player player) {
-            LOGGER.info(String.valueOf(player.getAbilities().getWalkingSpeed()));
         }
     }
 }
