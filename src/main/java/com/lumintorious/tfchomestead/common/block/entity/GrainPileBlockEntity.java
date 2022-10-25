@@ -40,7 +40,7 @@ public class GrainPileBlockEntity extends FoodHolderBlockEntity {
 
     public boolean canPreserve() {
         return getLevel() != null && !stack.isEmpty() &&
-            getLevel().getBrightness(LightLayer.SKY, getBlockPos()) < 15;
+            getLevel().getBrightness(LightLayer.SKY, getBlockPos()) < 14;
     }
 
     public boolean fits(ItemStack stack) {
