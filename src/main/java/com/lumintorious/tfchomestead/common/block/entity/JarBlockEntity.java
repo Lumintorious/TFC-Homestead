@@ -2,7 +2,8 @@ package com.lumintorious.tfchomestead.common.block.entity;
 
 import com.lumintorious.tfchomestead.common.block.HomesteadBlockEntities;
 import com.lumintorious.tfchomestead.common.api.StoredTrait;
-import com.lumintorious.tfchomestead.common.item.HomesteadItems;
+import com.lumintorious.tfchomestead.common.block.HomesteadBlocks;
+import net.dries007.tfc.common.capabilities.Capabilities;
 import net.dries007.tfc.common.capabilities.food.FoodCapability;
 import net.dries007.tfc.common.capabilities.food.FoodTraits;
 import net.dries007.tfc.common.fluids.SimpleFluid;
@@ -10,7 +11,6 @@ import net.dries007.tfc.common.fluids.TFCFluids;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -21,6 +21,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -30,6 +31,8 @@ import java.util.List;
 public class JarBlockEntity extends FoodHolderBlockEntity {
     private FluidTank tank = new FluidTank(8000);
     private boolean isPreserving = false;
+
+    private final LazyOptional<IFluidHandler> holder = LazyOptional.of(() -> tank);
 
     public JarBlockEntity(BlockEntityType<?> type, BlockPos pWorldPosition, BlockState pBlockState) {
         super(type, pWorldPosition, pBlockState);
@@ -50,9 +53,9 @@ public class JarBlockEntity extends FoodHolderBlockEntity {
     @Override
     public boolean getDrops(List<ItemStack> list) {
         boolean hasLiquid = this.tank.getFluidAmount() > 0;
-        var stack = new ItemStack(HomesteadItems.JAR.get(), 1);
+        var stack = new ItemStack(HomesteadBlocks.JAR.get(), 1);
         if(hasLiquid) {
-            stack = new ItemStack(HomesteadItems.FULL_JAR.get(), 1);
+            stack = new ItemStack(HomesteadBlocks.FULL_JAR.get(), 1);
         }
         CompoundTag tag = new CompoundTag();
         if(!this.stack.isEmpty()) {
@@ -123,25 +126,21 @@ public class JarBlockEntity extends FoodHolderBlockEntity {
 
     @NotNull
     @Override
-    @SuppressWarnings("unchecked")
     public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if(cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
-            return LazyOptional.of(() -> (T) tank);
-        } else {
-            return LazyOptional.empty();
-        }
+        if (cap == Capabilities.FLUID)
+            return holder.cast();
+        return super.getCapability(cap, side);
     }
 
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);
-        this.tank.setFluid(FluidStack.loadFluidStackFromNBT(tag.getCompound("fluid")));
+        tank.readFromNBT(tag.getCompound("tank"));
     }
+
 
     @Override
     protected void saveAdditional(CompoundTag tag) {
-        if(tank.getFluidAmount() != 0){
-            tag.put("fluid", tank.getFluid().writeToNBT(new CompoundTag()));
-        }
+        tag.put("tank", tank.writeToNBT(new CompoundTag()));
     }
 }

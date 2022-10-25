@@ -1,30 +1,24 @@
 package com.lumintorious.tfchomestead.common.item;
 
-import com.lumintorious.tfchomestead.common.block.HomesteadBlocks;
 import com.lumintorious.tfchomestead.common.block.entity.JarBlockEntity;
-import net.dries007.tfc.common.blocks.TFCBlocks;
-import net.dries007.tfc.common.items.TFCItems;
-import net.dries007.tfc.util.Helpers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentUtils;
 import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.ForgeFlowingFluid;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public class FullJarItemBlock extends BlockItem{
-    public FullJarItemBlock(Properties pProperties) {
-        super(HomesteadBlocks.JAR.get(), pProperties);
+    public FullJarItemBlock(Block block, Properties pProperties) {
+        super(block, pProperties);
     }
 
     @Override

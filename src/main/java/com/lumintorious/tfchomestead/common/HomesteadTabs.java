@@ -1,13 +1,11 @@
 package com.lumintorious.tfchomestead.common;
 
+import com.lumintorious.tfchomestead.common.block.HomesteadBlocks;
 import com.lumintorious.tfchomestead.common.drinks.AgedAlcohol;
 import com.lumintorious.tfchomestead.common.drinks.HomesteadFluid;
-import com.lumintorious.tfchomestead.common.item.HomesteadItems;
-import net.dries007.tfc.common.TFCTags;
 import net.dries007.tfc.common.blocks.wood.Wood;
 import net.dries007.tfc.common.items.TFCItems;
 import net.minecraft.core.NonNullList;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
@@ -18,7 +16,7 @@ public class HomesteadTabs {
     public static CreativeModeTab MAIN = new CreativeModeTab("tfchomestead") {
         @Override
         public ItemStack makeIcon() {
-            return new ItemStack(HomesteadItems.FOOD_SHELVES.get(Wood.OAK).get(), 1);
+            return new ItemStack(HomesteadBlocks.FOOD_SHELVES.get(Wood.OAK).get(), 1);
         }
 
         @Override

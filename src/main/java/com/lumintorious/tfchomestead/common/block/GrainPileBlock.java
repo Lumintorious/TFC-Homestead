@@ -2,41 +2,33 @@ package com.lumintorious.tfchomestead.common.block;
 
 import com.lumintorious.tfchomestead.common.block.entity.FoodHolderBlockEntity;
 import net.dries007.tfc.common.blocks.ExtendedProperties;
-import net.dries007.tfc.common.blocks.wood.Wood;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryObject;
 
-import java.util.Arrays;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.function.Supplier;
 
 public class GrainPileBlock extends HomesteadBlock {
-    public static ExtendedProperties PROPERTIES =
-        ExtendedProperties.of(Properties.of(Material.GRASS).strength(0.3F).sound(SoundType.GRASS).noOcclusion()
-            .isValidSpawn((a, b, c, d) -> false)
-            .isRedstoneConductor((a, b, c) -> false)
-            .isSuffocating((a, b, c) -> false)
-            .destroyTime(3.5f)
-            .isViewBlocking((a, b, c) -> false)).blockEntity(() -> HomesteadBlockEntities.GRAIN_PILE.get());
 
-    public GrainPileBlock(ExtendedProperties properties) {
+    private final Supplier<? extends Item> grain;
+
+    public GrainPileBlock(ExtendedProperties properties, Supplier<? extends Item> grain) {
         super(properties);
+        this.grain = grain;
+    }
+
+    public Item getGrainItem()
+    {
+        return grain.get();
     }
 
     @Override

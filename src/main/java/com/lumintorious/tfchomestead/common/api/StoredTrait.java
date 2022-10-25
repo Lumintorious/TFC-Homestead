@@ -4,17 +4,19 @@ import com.lumintorious.tfchomestead.TFCHomestead;
 import net.dries007.tfc.common.capabilities.food.FoodCapability;
 import net.dries007.tfc.common.capabilities.food.FoodTrait;
 import net.dries007.tfc.config.TFCConfig;
+import net.dries007.tfc.util.Helpers;
+
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.Objects;
 
-public class StoredTrait extends FoodTrait {
-    public static StoredTrait COOL = new StoredTrait(0.50F, "cool");
-    public static StoredTrait SHELVED = new StoredTrait(0.70F, "shelved");
-    public static StoredTrait HUNG = new StoredTrait(0.60F, "hung");
-    public static StoredTrait JAR = new StoredTrait(0.09F, "jar");
-    public static StoredTrait SHELTERED = new StoredTrait(0.40F, "sheltered");
+public final class StoredTrait {
+    public static FoodTrait COOL = register(0.50F, "cool");
+    public static FoodTrait SHELVED = register(0.70F, "shelved");
+    public static FoodTrait HUNG = register(0.60F, "hung");
+    public static FoodTrait JAR = register(0.09F, "jar");
+    public static FoodTrait SHELTERED = register(0.40F, "sheltered");
 
     public static void eraseAll(ItemStack stack) {
         FoodCapability.removeTrait(stack, COOL);
@@ -28,26 +30,10 @@ public class StoredTrait extends FoodTrait {
         });
     }
 
-    public final String translationKey;
-
-    public StoredTrait(float decayModifier, String translationKey) {
-        super(decayModifier, "tfchomestead.food_trait." + translationKey);
-        this.translationKey = "tfchomestead.food_trait." + translationKey;
+    private static FoodTrait register(float decayModifier, String name) {
+        return FoodTrait.register(new ResourceLocation(TFCHomestead.MOD_ID, name), new FoodTrait(decayModifier, "tfchomestead.food_trait." + name));
     }
 
-    public String getTranslationKey() {
-        return translationKey;
-    }
-
-    private static void register(StoredTrait trait) {
-        FoodTrait.register(new ResourceLocation(TFCHomestead.MOD_ID, trait.getTranslationKey()), trait);
-    }
-
-    public static void init() {
-        register(COOL);
-        register(SHELVED);
-        register(HUNG);
-        register(JAR);
-        register(SHELTERED);
-    }
+    // the classloading causes all these food traits to get registered automagically
+    public static void init() {}
 }

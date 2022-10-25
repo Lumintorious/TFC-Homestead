@@ -1,18 +1,19 @@
 package com.lumintorious.tfchomestead.common.block;
 
-import com.lumintorious.tfchomestead.TFCHomestead;
 import com.lumintorious.tfchomestead.common.block.entity.FoodShelfBlockEntity;
 import com.lumintorious.tfchomestead.common.block.entity.GrainPileBlockEntity;
 import com.lumintorious.tfchomestead.common.block.entity.HangerBlockEntity;
 import com.lumintorious.tfchomestead.common.block.entity.JarBlockEntity;
+import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.registry.RegistrationHelpers;
+
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 import static com.lumintorious.tfchomestead.TFCHomestead.MOD_ID;
@@ -51,11 +52,7 @@ public abstract class HomesteadBlockEntities {
             "grain_pile",
             GrainPileBlockEntity::new,
             Stream.of(
-                HomesteadBlocks.WHEAT_GRAIN_PILE,
-                HomesteadBlocks.MAIZE_GRAIN_PILE,
-                HomesteadBlocks.OAT_GRAIN_PILE,
-                HomesteadBlocks.RICE_GRAIN_PILE,
-                HomesteadBlocks.RYE_GRAIN_PILE
-            )
+                HomesteadBlocks.GRAIN_PILES.values()
+            ).<Supplier<? extends Block>>flatMap(Helpers::flatten)
         );
 }
