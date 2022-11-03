@@ -69,7 +69,6 @@ public class VillagerHomesteadFeature extends Feature<VillagerHomesteadConfig> {
                     // No world, can't rotate with world context
                 @SuppressWarnings("deprecation")
                 BlockState stateReplace = blockInfo.state.mirror(settings.getMirror()).rotate(settings.getRotation());
-                TFCHomestead.LOGGER.info(stateReplace.toString());
                 level.setBlock(posAt, Blocks.AIR.defaultBlockState(), 2);
                 level.setBlock(posAt, stateReplace, 2);
             }
