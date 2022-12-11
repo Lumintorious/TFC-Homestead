@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "tfchomestead:aged_beer",
+    "tfchomestead:aged_whiskey",
+    "tfchomestead:aged_corn_whiskey",
+    "tfchomestead:aged_rye_whiskey",
+    "tfchomestead:aged_cider",
+    "tfchomestead:aged_rum",
+    "tfchomestead:aged_sake",
+    "tfchomestead:aged_vodka"
+  ]
+}
