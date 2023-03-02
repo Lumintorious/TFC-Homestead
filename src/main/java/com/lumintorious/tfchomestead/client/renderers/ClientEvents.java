@@ -49,12 +49,12 @@ public class ClientEvents {
             FluidStack fluidStack = cap.getFluidInTank(0);
             if(!fluidStack.isEmpty()) {
                 event.getToolTip().add(new TranslatableComponent(fluidStack.getTranslationKey()).withStyle(ChatFormatting.GRAY));
-                var fluid = HomesteadFluid.AGED_ALCOHOL.inverse().keySet().stream().filter(f ->
-                    f.getSource() == fluidStack.getFluid()
-                ).findAny();
-                fluid.ifPresent(f -> {
-                    event.getToolTip().add(HomesteadFluid.AGED_ALCOHOL.inverse().get(f).getTooltip());
-                });
+                HomesteadFluid.AGED_ALCOHOL
+                        .entrySet()
+                        .stream()
+                        .filter(entry -> entry.getValue().getSource() == fluidStack.getFluid())
+                        .findAny()
+                        .map(entry -> event.getToolTip().add(entry.getKey().getTooltip()));
             }
         });
     }
